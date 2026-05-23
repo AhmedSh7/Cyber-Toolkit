@@ -8,6 +8,7 @@ from breach_checker import create_breach_checker_tab
 from whois_lookup import create_whois_tab
 from dns_lookup import create_dns_tab
 from port_scanner import create_port_scanner_tab
+from history import create_history_tab
 
 
 root = tk.Tk()
@@ -41,5 +42,6 @@ create_breach_checker_tab(notebook)
 create_whois_tab(notebook)
 create_dns_tab(notebook)
 create_port_scanner_tab(notebook)
+create_history_tab(notebook)
 
 root.mainloop()

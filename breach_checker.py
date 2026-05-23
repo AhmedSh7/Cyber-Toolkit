@@ -2,6 +2,7 @@ import tkinter as tk
 import hashlib
 import requests
 
+from history import save_scan
 from shared import *
 
 
@@ -43,6 +44,7 @@ def create_breach_checker_tab(notebook):
             if response.status_code != 200:
                 result_text.delete("1.0", tk.END)
                 result_text.insert(tk.END, "Could not check password at this time.\n", "bad")
+                save_scan("Password Breach Checker", "Password Check", result_text.get("1.0", tk.END))
                 return
 
             found_count = 0
@@ -64,9 +66,12 @@ def create_breach_checker_tab(notebook):
                 result_text.insert(tk.END, "[+] Password was not found in known breach data.\n", "good")
                 result_text.insert(tk.END, "Still use a unique password and MFA when possible.\n")
 
+            save_scan("Password Breach Checker", "Password Check", result_text.get("1.0", tk.END))
+
         except Exception as e:
             result_text.delete("1.0", tk.END)
             result_text.insert(tk.END, f"Could not check password:\n{e}\n", "bad")
+            save_scan("Password Breach Checker", "Password Check", result_text.get("1.0", tk.END))
 
     def export_breach_pdf():
         content = result_text.get("1.0", tk.END)

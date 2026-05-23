@@ -1,6 +1,7 @@
 import tkinter as tk
 import socket
 
+from history import save_scan
 from shared import *
 
 
@@ -58,6 +59,7 @@ def create_port_scanner_tab(notebook):
 
             except Exception as e:
                 result_text.insert(tk.END, f"[-] Error scanning port {port}: {e}\n", "bad")
+                save_scan("Port Scanner", target, result_text.get("1.0", tk.END))
 
     def export_port_pdf():
         content = result_text.get("1.0", tk.END)

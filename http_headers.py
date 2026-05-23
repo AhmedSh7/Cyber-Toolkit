@@ -1,6 +1,7 @@
 import tkinter as tk
 import requests
 
+from history import save_scan
 from shared import *
 
 
@@ -74,6 +75,8 @@ def create_http_headers_tab(notebook):
 
             result_text.insert(tk.END, f"\nSecurity Score: {score}/100\n")
             result_text.insert(tk.END, f"Security Grade: {grade}\n")
+
+            save_scan("HTTP Headers Scanner", url, result_text.get("1.0", tk.END))
 
         except Exception as e:
             result_text.delete("1.0", tk.END)

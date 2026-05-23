@@ -1,6 +1,7 @@
 import tkinter as tk
 import whois
 
+from history import save_scan
 from shared import *
 
 
@@ -45,6 +46,7 @@ def create_whois_tab(notebook):
         except Exception as e:
             result_text.delete("1.0", tk.END)
             result_text.insert(tk.END, f"WHOIS lookup failed:\n{e}\n", "bad")
+            save_scan("WHOIS Lookup", domain, result_text.get("1.0", tk.END))
 
     def export_whois_pdf():
         content = result_text.get("1.0", tk.END)

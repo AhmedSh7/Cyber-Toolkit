@@ -2,6 +2,7 @@ import tkinter as tk
 import re
 from tkinter import filedialog
 
+from history import save_scan
 from shared import *
 
 
@@ -36,7 +37,6 @@ def create_hash_tab(notebook):
     make_subtitle(hash_tab, "Analyze and identify possible hash types")
 
     hash_entry = make_entry(hash_tab)
-
     result_text = make_text(hash_tab)
 
     def identify_hash():
@@ -48,8 +48,12 @@ def create_hash_tab(notebook):
             result_text.insert(tk.END, "Please enter a hash.\n", "bad")
             return
 
+        result = analyze_hash_value(hash_value)
+
         result_text.insert(tk.END, f"Analyzing hash:\n{hash_value}\n\n")
-        result_text.insert(tk.END, analyze_hash_value(hash_value))
+        result_text.insert(tk.END, result)
+
+        save_scan("Hash Identifier", hash_value, result_text.get("1.0", tk.END))
 
     def upload_hash_file():
         file_path = filedialog.askopenfilename(
@@ -74,6 +78,12 @@ def create_hash_tab(notebook):
                     result_text.insert(tk.END, f"Hash: {hash_value}\n")
                     result_text.insert(tk.END, analyze_hash_value(hash_value))
                     result_text.insert(tk.END, "\n-------------------------\n")
+
+            save_scan(
+                "Hash Identifier TXT Upload",
+                file_path,
+                result_text.get("1.0", tk.END)
+            )
 
         except Exception as e:
             result_text.insert(tk.END, f"Error reading file: {e}\n", "bad")

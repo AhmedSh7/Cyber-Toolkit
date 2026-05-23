@@ -1,6 +1,7 @@
 import tkinter as tk
 import dns.resolver
 
+from history import save_scan
 from shared import *
 
 
@@ -50,6 +51,7 @@ def create_dns_tab(notebook):
 
             except Exception:
                 result_text.insert(tk.END, f"{record_type} Records: Not found\n\n", "bad")
+                save_scan("DNS Lookup", domain, result_text.get("1.0", tk.END))
 
     def export_dns_pdf():
         content = result_text.get("1.0", tk.END)
