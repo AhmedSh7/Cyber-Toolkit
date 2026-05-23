@@ -1,35 +1,45 @@
-from colorama import Fore, Style, init
+import tkinter as tk
+from tkinter import ttk
 
-init(autoreset=True)
-
-
-def identify_hash(hash_value):
-    hash_value = hash_value.strip()
-    hash_length = len(hash_value)
-
-    hash_types = {
-        32: ["MD5", "MD4", "NTLM"],
-        40: ["SHA1", "RIPEMD-160"],
-        56: ["SHA224"],
-        64: ["SHA256", "SHA3-256", "BLAKE2s"],
-        96: ["SHA384"],
-        128: ["SHA512", "SHA3-512", "BLAKE2b"]
-    }
-
-    print(Fore.YELLOW + "\nAnalyzing hash...\n")
-
-    if hash_length in hash_types:
-        print(Fore.GREEN + "[+] Possible hash type(s):")
-        for hash_type in hash_types[hash_length]:
-            print(Fore.CYAN + f"    - {hash_type}")
-    else:
-        print(Fore.RED + "[-] Unknown hash type")
+from shared import BG, GREEN
+from hash_identifier import create_hash_tab
+from http_headers import create_http_headers_tab
+from breach_checker import create_breach_checker_tab
+from whois_lookup import create_whois_tab
+from dns_lookup import create_dns_tab
+from port_scanner import create_port_scanner_tab
 
 
-print(Fore.MAGENTA + "=== HASH IDENTIFIER TOOL ===")
+root = tk.Tk()
+root.title("Cyber Toolkit")
+root.geometry("850x650")
+root.configure(bg=BG)
 
-user_hash = input("\nEnter a hash value: ")
+style = ttk.Style()
+style.theme_use("default")
 
-identify_hash(user_hash)
+style.configure(
+    "TNotebook",
+    background=BG,
+    borderwidth=0
+)
 
-print(Style.RESET_ALL)
+style.configure(
+    "TNotebook.Tab",
+    background="#1a1a1a",
+    foreground=GREEN,
+    padding=[10, 5],
+    font=("Arial", 10, "bold")
+)
+
+notebook = ttk.Notebook(root)
+notebook.pack(fill="both", expand=True)
+
+create_hash_tab(notebook)
+create_http_headers_tab(notebook)
+create_breach_checker_tab(notebook)
+create_whois_tab(notebook)
+create_dns_tab(notebook)
+create_port_scanner_tab(notebook)
+
+root.mainloop()
