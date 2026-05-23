@@ -1,6 +1,15 @@
 .venv/
+__pycache__/
+*.pyc
+
 build/
 dist/
-__pycache__/
 *.spec
+*.app
+*.dmg
+
 .DS_Store
+.idea/
+*.log
+
+icon.iconset/
