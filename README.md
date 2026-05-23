@@ -51,6 +51,9 @@ designed for students, beginners, and cybersecurity enthusiasts.
 ## Port Scanner
 ![Ports](screenshots/ports.png)
 
+## CVE Search
+![CVE Search](screenshots/CVEsearch.png)
+
 ### Scan History
 ![History](screenshots/history.png)
 
