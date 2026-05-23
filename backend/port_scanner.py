@@ -2,6 +2,7 @@ import tkinter as tk
 import socket
 
 from backend.history import save_scan
+from backend.recommendations import get_recommendations
 from shared import *
 
 
@@ -58,8 +59,27 @@ def create_port_scanner_tab(notebook):
                 sock.close()
 
             except Exception as e:
-                result_text.insert(tk.END, f"[-] Error scanning port {port}: {e}\n", "bad")
-                save_scan("Port Scanner", target, result_text.get("1.0", tk.END))
+                result_text.insert(
+                    tk.END,
+                    f"[-] Error scanning port {port}: {e}\n",
+                    "bad"
+                )
+
+        recommendations = get_recommendations(
+            "Port Scanner",
+            result_text.get("1.0", tk.END)
+        )
+
+        result_text.insert(tk.END, recommendations)
+
+        save_scan(
+            "Port Scanner",
+            target,
+            result_text.get("1.0", tk.END)
+        )
+
+
+
 
     def export_port_pdf():
         content = result_text.get("1.0", tk.END)

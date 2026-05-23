@@ -49,27 +49,55 @@ def write_pdf(title, content):
 
 
 def make_label(parent, text, size=22):
-    label = tk.Label(parent, text=text, font=("Arial", size, "bold"), fg=GREEN, bg=BG)
+    label = tk.Label(
+        parent,
+        text=text,
+        font=("Arial", size, "bold"),
+        fg=GREEN,
+        bg=BG
+    )
     label.pack(pady=20)
     return label
 
 
 def make_subtitle(parent, text):
-    label = tk.Label(parent, text=text, font=("Arial", 11), fg=GRAY, bg=BG)
+    label = tk.Label(
+        parent,
+        text=text,
+        font=("Arial", 11),
+        fg=GRAY,
+        bg=BG
+    )
     label.pack()
     return label
 
 
 def make_entry(parent, width=60, show=None):
-    entry = tk.Entry(parent, width=width, font=("Arial", 13), bg=ENTRY_BG, fg=GREEN,
-                     insertbackground=GREEN, show=show)
+    entry = tk.Entry(
+        parent,
+        width=width,
+        font=("Arial", 13),
+        bg=ENTRY_BG,
+        fg=GREEN,
+        insertbackground=GREEN,
+        show=show
+    )
     entry.pack(pady=15)
     return entry
 
 
-def make_text(parent, height=18):
-    text = tk.Text(parent, width=78, height=height, bg=BOX_BG, fg=GREEN,
-                   font=("Courier", 11), insertbackground=GREEN)
+def make_text(parent, height=20):
+    text = tk.Text(
+        parent,
+        height=height,
+        width=80,
+        bg=BOX_BG,
+        fg=GREEN,
+        insertbackground=GREEN,
+        wrap="word",
+        font=("Courier", 10, "bold")
+    )
+
     text.tag_config("good", foreground=GREEN)
     text.tag_config("bad", foreground=RED)
     text.pack(pady=20)
