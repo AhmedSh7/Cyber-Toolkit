@@ -4,6 +4,8 @@ Cyber Toolkit is a Python-based cybersecurity desktop application built with Tki
 The toolkit provides multiple security analysis utilities inside a modern desktop GUI 
 designed for students, beginners, and cybersecurity enthusiasts.
 
+Note: Subdomain enumeration uses public certificate transparency logs. Some domains may fail temporarily if the public source is slow, rate-limited, or unavailable.
+
 ## Features
 
 - Hash Identifier
@@ -53,6 +55,9 @@ designed for students, beginners, and cybersecurity enthusiasts.
 
 ## CVE Search
 ![CVE Search](screenshots/CVEsearch.png)
+
+## Passive Subdomain Enumeration
+![Subdomain Enumeration](screenshots/subdomain_enum.png)
 
 ### Scan History
 ![History](screenshots/history.png)
