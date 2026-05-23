@@ -45,9 +45,18 @@ Cyber Toolkit is a Python-based cybersecurity desktop application built with Tki
 
 ## Installation
 
+## Installation
+
 ```bash
 pip install -r requirements.txt
 python main.py
+```
+
+## Build macOS App
+
+```bash
+pyinstaller "Cyber Toolkit.spec"
+```
 
 ## Author
 
