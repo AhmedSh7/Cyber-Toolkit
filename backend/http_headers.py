@@ -2,6 +2,7 @@ import tkinter as tk
 import requests
 
 from backend.history import save_scan
+from backend.recommendations import get_recommendations
 from shared import *
 
 
@@ -75,6 +76,13 @@ def create_http_headers_tab(notebook):
 
             result_text.insert(tk.END, f"\nSecurity Score: {score}/100\n")
             result_text.insert(tk.END, f"Security Grade: {grade}\n")
+
+            recommendations = get_recommendations(
+                "HTTP Headers",
+                result_text.get("1.0", tk.END)
+            )
+
+            result_text.insert(tk.END, recommendations)
 
             save_scan("HTTP Headers Scanner", url, result_text.get("1.0", tk.END))
 

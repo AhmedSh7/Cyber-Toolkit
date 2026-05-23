@@ -41,6 +41,9 @@ Note: Subdomain enumeration uses public certificate transparency logs. Some doma
 ## HTTP Headers Scanner
 ![Headers](screenshots/headers.png)
 
+## Security Recommendations
+![Recommendations](screenshots/recommendation.png)
+
 ## Password Breach Checker
 ![Breach](screenshots/breach.png)
 
