@@ -6,6 +6,8 @@ import hashlib
 import requests
 import socket
 import whois
+import threading
+import dns.resolver
 
 
 # ---------- SHARED ----------
@@ -15,6 +17,11 @@ def write_pdf(title, content):
         defaultextension=".pdf",
         filetypes=[("PDF Files", "*.pdf")]
     )
+
+def run_in_thread(function):
+    thread = threading.Thread(target=function)
+    thread.daemon = True
+    thread.start()
 
     if not file_path:
         return
@@ -124,7 +131,7 @@ def scan_headers():
     headers_result.delete("1.0", tk.END)
     headers_result.insert(tk.END, "[*] Scanning website headers...\n")
 
-    root.after(500, lambda: finish_scan_headers(url))
+    run_in_thread(lambda: finish_scan_headers(url))
 
 
 def finish_scan_headers(url):
@@ -182,7 +189,7 @@ def check_password_breach():
     breach_result.delete("1.0", tk.END)
     breach_result.insert(tk.END, "[*] Checking password exposure safely...\n")
 
-    root.after(500, lambda: finish_password_check(password))
+    run_in_thread(lambda: finish_password_check(password))
 
 
 def finish_password_check(password):
@@ -235,7 +242,7 @@ def run_whois():
     whois_result.delete("1.0", tk.END)
     whois_result.insert(tk.END, "[*] Running WHOIS lookup...\n")
 
-    root.after(500, lambda: finish_whois(domain))
+    run_in_thread(lambda: finish_whois(domain))
 
 
 def finish_whois(domain):
@@ -277,7 +284,7 @@ def scan_ports():
     port_result.insert(tk.END, "[*] Starting basic port scan...\n")
     port_result.insert(tk.END, "Only scan systems you own or have permission to test.\n\n")
 
-    root.after(500, lambda: finish_port_scan(target, ports))
+    run_in_thread(lambda: finish_port_scan(target, ports))
 
 
 def finish_port_scan(target, ports):
@@ -296,6 +303,43 @@ def finish_port_scan(target, ports):
 
         except Exception as e:
             port_result.insert(tk.END, f"[-] Error scanning port {port}: {e}\n", "bad")
+
+# ---------- DNS LOOKUP ----------
+
+def run_dns_lookup():
+    domain = dns_entry.get().strip()
+
+    if not domain:
+        messagebox.showerror("Error", "Please enter a domain.")
+        return
+
+    domain = domain.replace("https://", "").replace("http://", "").split("/")[0]
+
+    dns_result.delete("1.0", tk.END)
+    dns_result.insert(tk.END, "[*] Running DNS lookup...\n")
+
+    run_in_thread(lambda: finish_dns_lookup(domain))
+
+
+def finish_dns_lookup(domain):
+    record_types = ["A", "AAAA", "MX", "NS", "TXT"]
+
+    dns_result.delete("1.0", tk.END)
+    dns_result.insert(tk.END, f"DNS Lookup: {domain}\n\n")
+
+    for record_type in record_types:
+        try:
+            answers = dns.resolver.resolve(domain, record_type)
+
+            dns_result.insert(tk.END, f"{record_type} Records:\n", "good")
+
+            for answer in answers:
+                dns_result.insert(tk.END, f"  {answer}\n")
+
+            dns_result.insert(tk.END, "\n")
+
+        except Exception:
+            dns_result.insert(tk.END, f"{record_type} Records: Not found\n\n", "bad")
 
 
 # ---------- UI HELPERS ----------
@@ -440,5 +484,18 @@ make_button(port_tab, "Scan Ports", scan_ports, True).pack()
 
 port_result = make_text(port_tab)
 
+# DNS LOOKUP TAB
+dns_tab = tk.Frame(notebook, bg="#0d0d0d")
+notebook.add(dns_tab, text="DNS Lookup")
+
+make_label(dns_tab, "DNS LOOKUP")
+make_subtitle(dns_tab, "Look up DNS records for a domain")
+
+dns_entry = make_entry(dns_tab)
+dns_entry.insert(0, "github.com")
+
+make_button(dns_tab, "Run DNS Lookup", run_dns_lookup, True).pack()
+
+dns_result = make_text(dns_tab)
 
 root.mainloop()
