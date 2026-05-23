@@ -2,7 +2,7 @@ import tkinter as tk
 import re
 from tkinter import filedialog
 
-from history import save_scan
+from backend.history import save_scan
 from shared import *
 
 

@@ -2,13 +2,14 @@ import tkinter as tk
 from tkinter import ttk
 
 from shared import BG, GREEN
-from hash_identifier import create_hash_tab
-from http_headers import create_http_headers_tab
-from breach_checker import create_breach_checker_tab
-from whois_lookup import create_whois_tab
-from dns_lookup import create_dns_tab
-from port_scanner import create_port_scanner_tab
-from history import create_history_tab
+
+from backend.hash_identifier import create_hash_tab
+from backend.http_headers import create_http_headers_tab
+from backend.breach_checker import create_breach_checker_tab
+from backend.whois_lookup import create_whois_tab
+from backend.dns_lookup import create_dns_tab
+from backend.port_scanner import create_port_scanner_tab
+from backend.history import create_history_tab
 
 
 root = tk.Tk()

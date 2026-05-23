@@ -2,7 +2,7 @@ import tkinter as tk
 import hashlib
 import requests
 
-from history import save_scan
+from backend.history import save_scan
 from shared import *
 
 
