@@ -123,6 +123,10 @@ def create_subdomain_tab(notebook):
                 f"Error finding subdomains:\n{e}"
             )
 
+    def export_subdomain_pdf():
+        content = result_text.get("1.0", tk.END)
+        write_pdf("Subdomain Enumeration Report", content)
+
     def run_thread():
         threading.Thread(
             target=find_subdomains,
@@ -132,11 +136,5 @@ def create_subdomain_tab(notebook):
     button_frame = tk.Frame(subdomain_tab, bg=BG)
     button_frame.pack(pady=15)
 
-    tk.Button(
-        button_frame,
-        text="Find Subdomains",
-        command=run_thread,
-        font=("Arial", 10, "bold"),
-        fg=GREEN,
-        width=20
-    ).pack()
+    make_button(button_frame, "Find Subdomains", run_thread, green=True).pack(side="left", padx=10)
+    make_button(button_frame, "Export PDF", export_subdomain_pdf).pack(side="left", padx=10)

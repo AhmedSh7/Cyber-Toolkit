@@ -88,17 +88,15 @@ def create_cve_search_tab(notebook):
             result_text.delete("1.0", tk.END)
             result_text.insert(tk.END, f"Error searching CVEs:\n{e}")
 
+    def export_cve_pdf():
+        content = result_text.get("1.0", tk.END)
+        write_pdf("CVE Search Report", content)
+
     def run_thread():
         threading.Thread(target=search_cves, daemon=True).start()
 
     button_frame = tk.Frame(cve_tab, bg=BG)
     button_frame.pack(pady=15)
 
-    tk.Button(
-        button_frame,
-        text="Search CVEs",
-        command=run_thread,
-        font=("Arial", 10, "bold"),
-        fg=GREEN,
-        width=20
-    ).pack()
+    make_button(button_frame, "Search CVEs", run_thread, green=True).pack(side="left", padx=10)
+    make_button(button_frame, "Export PDF", export_cve_pdf).pack(side="left", padx=10)
