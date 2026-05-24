@@ -19,6 +19,12 @@ Note: Subdomain enumeration uses public certificate transparency logs. Some doma
 - Local Scan History
 - Multi-threaded Scanning
 - macOS Desktop App Bundle
+- CVE Vulnerability Search
+- Passive Subdomain Enumeration
+- Advanced Nmap Scanner
+- Rule-Based Security Recommendations
+- Nmap PDF Export
+- Service Version Detection
 
 
 ## Technologies Used
@@ -62,6 +68,9 @@ Note: Subdomain enumeration uses public certificate transparency logs. Some doma
 ## Passive Subdomain Enumeration
 ![Subdomain Enumeration](screenshots/subdomain_enum.png)
 
+## Nmap Recommendations & PDF Export
+![Nmap Advanced](screenshots/Nmap2.png)
+
 ### Scan History
 ![History](screenshots/history.png)
 
@@ -82,8 +91,6 @@ python main.py
 ```bash
 pyinstaller "Cyber Toolkit.spec"
 ```
-
-## Author
 
 ## Author
 
