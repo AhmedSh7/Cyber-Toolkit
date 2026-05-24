@@ -8,23 +8,18 @@ Note: Subdomain enumeration uses public certificate transparency logs. Some doma
 
 ## Features
 
-- Hash Identifier
-- TXT Hash Upload Support
-- HTTP Security Header Scanner
-- Password Breach Checker
-- WHOIS Lookup
-- DNS Lookup
-- Port Scanner
-- PDF Export Support
-- Local Scan History
-- Multi-threaded Scanning
-- macOS Desktop App Bundle
-- CVE Vulnerability Search
-- Passive Subdomain Enumeration
-- Advanced Nmap Scanner
-- Rule-Based Security Recommendations
-- Nmap PDF Export
-- Service Version Detection
+- Hash analysis
+- HTTP security header scanning
+- Password breach checking
+- WHOIS and DNS analysis
+- Port scanning
+- CVE vulnerability lookup
+- Passive subdomain enumeration
+- Nmap integration
+- PDF report exporting
+- Local scan history tracking
+
+The project was developed as a hands-on cybersecurity portfolio project focused on desktop application development, networking, multithreading, and macOS application packaging.
 
 
 ## Technologies Used
@@ -38,6 +33,20 @@ Note: Subdomain enumeration uses public certificate transparency logs. Some doma
 - dnspython
 - hashlib
 - threading
+
+## Skills Demonstrated
+
+- Python Application Development
+- Tkinter GUI Development
+- SQLite Database Integration
+- API Integration
+- Multithreading
+- Network Scanning
+- Nmap Automation
+- PDF Report Generation
+- macOS Application Packaging
+- Cybersecurity Tool Development
+- Defensive Security Analysis
 
 ## Screenshots
 
@@ -85,12 +94,30 @@ cd Cyber-Toolkit
 pip install -r requirements.txt
 python main.py
 ```
+## macOS Installer
+
+The project includes a fully packaged macOS application bundle and DMG installer.
+
+### Installation Steps
+1. Download `Cyber Toolkit.dmg`
+2. Open the DMG file
+3. Drag `Cyber Toolkit.app` into Applications
+4. Right-click → Open on first launch if macOS security prompts appear
+
 
 ## Build macOS App
 
 ```bash
 pyinstaller "Cyber Toolkit.spec"
 ```
+## Disclaimer
+
+This project is intended for educational and authorized security testing purposes only.
+
+Only scan systems you own or have explicit permission to test.
+
+The developer is not responsible for misuse of this software.
+
 
 ## Author
 
