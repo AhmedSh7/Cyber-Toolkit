@@ -1,3 +1,0 @@
-([('gui',
-   '/Users/ashammout7/CybersecurityProjects/hash_identifier/dist/gui',
-   'EXECUTABLE')],)

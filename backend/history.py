@@ -1,11 +1,15 @@
 import tkinter as tk
 import sqlite3
 import datetime
+import os
 
 from shared import *
 
 
-DB_NAME = "scan_history.db"
+APP_DATA_DIR = os.path.join(os.path.expanduser("~"), "CyberToolkit")
+os.makedirs(APP_DATA_DIR, exist_ok=True)
+
+DB_NAME = os.path.join(APP_DATA_DIR, "scan_history.db")
 
 
 def initialize_database():
